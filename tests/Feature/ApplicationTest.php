@@ -128,3 +128,20 @@ test('users cannot delete another user\'s application', function () {
     
     $this->assertModelExists($application);
 });
+
+test('Optional fields are saved when creating an application', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)->post(route('applications.store'), [
+        'company' => 'Acme',
+        'role' => 'Intern',
+        'status' => 'applied',
+        'applied_at' => '2026-11-01',
+        'url' => 'https://example.com/jobs/1',
+        'notes' => 'Referred by a friend',
+    ]);
+
+    $application = $user->applications()->firstOrFail();
+
+    expect($application->applied_at->toDateString())->toBe('2026-11-01')->and($application->url)->toBe('https://example.com/jobs/1')->and($application->notes)->toBe('Referred by a friend');
+});

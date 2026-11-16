@@ -20,6 +20,7 @@ class ApplicationRequest extends FormRequest
             'company' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
             'status' => ['required', Rule::enum(ApplicationStatus::class)],
+            'applied_at' => ['nullable', 'date'],
             'url' => ['nullable', 'url', 'max:2048'],
             'notes' => ['nullable', 'string', 'max:5000']
         ];

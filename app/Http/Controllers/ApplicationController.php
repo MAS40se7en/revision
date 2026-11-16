@@ -24,7 +24,7 @@ class ApplicationController extends Controller
 
         $applications = $request->user()
             ->applications()
-            ->withCount()
+            ->withCount('interviews')
             ->when($status, fn ($query, ApplicationStatus $status) => $query->where('status', $status))
             ->latest()
             ->paginate(10)

@@ -29,24 +29,34 @@ class Application extends Model
     /** @use HasFactory<ApplicationFactory> */
     use HasFactory;
 
-    /** 
+    /**
      * Get the attributes that should be case.
-     * 
+     *
      * @return array<string, string>
-    */
+     */
     protected function casts(): array
     {
         return [
             'status' => ApplicationStatus::class,
-            'applied_at' => 'date'
+            'applied_at' => 'date',
         ];
     }
 
+    /**
+     * Summary of user
+     *
+     * @return BelongsTo<User, $this>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Summary of interviews
+     *
+     * @return HasMany<Interview, $this>
+     */
     public function interviews(): HasMany
     {
         return $this->hasMany(Interview::class);

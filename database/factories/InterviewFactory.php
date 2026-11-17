@@ -22,7 +22,7 @@ class InterviewFactory extends Factory
             'application_id' => Application::factory(),
             'scheduled_at' => fake()->dateTimeBetween('now', '+1 month'),
             'type' => fake()->randomElement(['phone screen', 'technical', 'onsite', 'culture fit']),
-            'notes' => fake()->optional()->sentence()
+            'notes' => fake()->optional()->sentence(),
         ];
     }
 }

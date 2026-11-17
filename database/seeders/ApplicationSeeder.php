@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Application;
 use App\Models\Interview;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ApplicationSeeder extends Seeder
@@ -20,7 +19,7 @@ class ApplicationSeeder extends Seeder
                 ->count(8)
                 ->for($user)
                 ->has(Interview::factory()
-                ->count(1))
+                    ->count(1))
                 ->create();
         });
     }

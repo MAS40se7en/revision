@@ -26,7 +26,7 @@ class ApplicationFactory extends Factory
             'status' => fake()->randomElement(ApplicationStatus::cases()),
             'applied_at' => fake()->optional()->date(),
             'url' => fake()->optional()->url(),
-            'notes' => fake()->optional()->sentence()
+            'notes' => fake()->optional()->sentence(),
         ];
     }
 
@@ -36,7 +36,7 @@ class ApplicationFactory extends Factory
     public function withStatus(ApplicationStatus $status): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => $status
+            'status' => $status,
         ]);
     }
 }

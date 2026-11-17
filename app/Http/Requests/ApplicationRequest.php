@@ -22,7 +22,7 @@ class ApplicationRequest extends FormRequest
             'status' => ['required', Rule::enum(ApplicationStatus::class)],
             'applied_at' => ['nullable', 'date'],
             'url' => ['nullable', 'url', 'max:2048'],
-            'notes' => ['nullable', 'string', 'max:5000']
+            'notes' => ['nullable', 'string', 'max:5000'],
         ];
     }
 }

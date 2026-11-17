@@ -1,11 +1,17 @@
-import { Application } from "@/types";
-import { Form } from "@inertiajs/react"
-import { ComponentProps } from "react"
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import InputError from "./input-error";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Button } from "./ui/button";
+import { Application } from '@/types';
+import { Form } from '@inertiajs/react';
+import { ComponentProps } from 'react';
+import { Label } from './ui/label';
+import { Input } from './ui/input';
+import InputError from './input-error';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from './ui/select';
+import { Button } from './ui/button';
 
 type Props = {
     formProps: Pick<ComponentProps<typeof Form>, 'action' | 'method'>;
@@ -18,7 +24,7 @@ export default function ApplicationForm({
     formProps,
     statuses,
     application,
-    submitLabel
+    submitLabel,
 }: Props) {
     return (
         <Form {...formProps} className="space-y-6">
@@ -26,7 +32,7 @@ export default function ApplicationForm({
                 <>
                     <div className="grid gap-2">
                         <Label htmlFor="company">Company</Label>
-                        <Input 
+                        <Input
                             id="company"
                             name="company"
                             defaultValue={application?.company}
@@ -38,7 +44,7 @@ export default function ApplicationForm({
 
                     <div className="grid gap-2">
                         <Label htmlFor="role">Role</Label>
-                        <Input 
+                        <Input
                             id="role"
                             name="role"
                             defaultValue={application?.role}
@@ -74,7 +80,7 @@ export default function ApplicationForm({
 
                     <div className="grid gap-2">
                         <Label htmlFor="applied_at">Date applied</Label>
-                        <Input 
+                        <Input
                             id="applied_at"
                             name="applied_at"
                             type="date"
@@ -85,7 +91,7 @@ export default function ApplicationForm({
 
                     <div className="grid gap-2">
                         <Label htmlFor="url">Job posting URL</Label>
-                        <Input 
+                        <Input
                             id="url"
                             name="url"
                             type="url"
@@ -97,8 +103,8 @@ export default function ApplicationForm({
 
                     <div className="grid gap-2">
                         <Label htmlFor="notes">Notes</Label>
-                        <textarea 
-                            name="notes" 
+                        <textarea
+                            name="notes"
                             id="notes"
                             defaultValue={application?.notes ?? ''}
                             className="flex min-h-24 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-50"
@@ -106,11 +112,9 @@ export default function ApplicationForm({
                         <InputError message={errors.notes} />
                     </div>
 
-                    <Button disabled={processing}>
-                        {submitLabel}
-                    </Button>
+                    <Button disabled={processing}>{submitLabel}</Button>
                 </>
             )}
         </Form>
-    )
+    );
 }

@@ -41,7 +41,7 @@ test('users can create an application owned by themselves', function () {
         'company' => 'Acme',
         'role' => 'Intern',
         'status' => 'applied',
-        'user_id' => $otherUser->id
+        'user_id' => $otherUser->id,
     ]);
 
     $application = $user->applications()->firstOrFail();
@@ -55,7 +55,7 @@ test('creating an application validates its input', function () {
     $this->actingAs(User::factory()->create())
         ->post(route('applications.store'), [
             'status' => 'not-a-status',
-            'url' => 'not-a-url'
+            'url' => 'not-a-url',
         ])
         ->assertSessionHasErrors(['company', 'role', 'status', 'url']);
 });
@@ -77,10 +77,10 @@ test('users can update their own application', function () {
         ->put(route('applications.update', $application), [
             'company' => 'New Company',
             'role' => $application->role,
-            'status' => 'offer'
+            'status' => 'offer',
         ])
         ->assertRedirect(route('applications.show', $application));
-    
+
     expect($application->refresh())
         ->company->toBe('New Company')
         ->status->toBe(ApplicationStatus::Offer);
@@ -93,7 +93,7 @@ test('users can delete their own application', function () {
     $this->actingAs($user)
         ->delete(route('applications.destroy', $application))
         ->assertRedirect(route('applications.index'));
-    
+
     $this->assertModelMissing($application);
 });
 
@@ -112,10 +112,10 @@ test('users cannot update another user\'s application', function () {
         ->put(route('applications.update', $application), [
             'company' => 'Hacked',
             'role' => $application->role,
-            'status' => 'offer'
+            'status' => 'offer',
         ])
         ->assertForbidden();
-    
+
     expect($application->refresh()->company)->toBe('Original');
 });
 
@@ -125,7 +125,7 @@ test('users cannot delete another user\'s application', function () {
     $this->actingAs(User::factory()->create())
         ->delete(route('applications.destroy', $application))
         ->assertForbidden();
-    
+
     $this->assertModelExists($application);
 });
 

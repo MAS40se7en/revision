@@ -1,27 +1,33 @@
-import ApplicationController from "@/actions/App/Http/Controllers/ApplicationController";
-import Heading from "@/components/heading";
-import StatusBadge from "@/components/status-badge";
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Application, Paginated } from "@/types"
-import { Head, Link, router } from '@inertiajs/react'
+import ApplicationController from '@/actions/App/Http/Controllers/ApplicationController';
+import Heading from '@/components/heading';
+import StatusBadge from '@/components/status-badge';
+import { Button } from '@/components/ui/button';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import { Application, Paginated } from '@/types';
+import { Head, Link, router } from '@inertiajs/react';
 
 type Props = {
     applications: Paginated<Application>;
     filters: { status: string | null };
     statuses: string[];
-}
+};
 
 export default function ApplicationsIndex({
     applications,
     filters,
-    statuses
+    statuses,
 }: Props) {
     function filterByStatus(value: string) {
         router.get(
             ApplicationController.index.url(),
             value === 'all' ? {} : { status: value },
-            { preserveState: true, replace: true }
+            { preserveState: true, replace: true },
         );
     }
 
@@ -78,19 +84,21 @@ export default function ApplicationsIndex({
                                     <th className="p-3 font-medium">Role</th>
                                     <th className="p-3 font-medium">Status</th>
                                     <th className="p-3 font-medium">Applied</th>
-                                    <th className="p-3 font-medium">Interviews</th>
+                                    <th className="p-3 font-medium">
+                                        Interviews
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {applications.data.map((application) => (
-                                    <tr 
+                                    <tr
                                         key={application.id}
                                         className="border-b last:border-0"
                                     >
                                         <td className="p-3">
                                             <Link
                                                 href={ApplicationController.show(
-                                                    application.id
+                                                    application.id,
                                                 )}
                                                 classID="font-medium underline-offset-4 hover:underline"
                                             >
@@ -101,7 +109,7 @@ export default function ApplicationsIndex({
                                             {application.role}
                                         </td>
                                         <td className="p-3">
-                                            <StatusBadge 
+                                            <StatusBadge
                                                 status={application.status}
                                             />
                                         </td>
@@ -123,7 +131,7 @@ export default function ApplicationsIndex({
 
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                     <span>
-                        Page {applications.current_page} of {' '}
+                        Page {applications.current_page} of{' '}
                         {applications.last_page} · {applications.total} total
                     </span>
                     <div className="flex gap-2">
@@ -145,14 +153,14 @@ export default function ApplicationsIndex({
                 </div>
             </div>
         </>
-    )
+    );
 }
 
 ApplicationsIndex.layout = {
     Breadcrumbs: [
         {
             title: 'Applications',
-            href: ApplicationController.index()
-        }
-    ]
-}
+            href: ApplicationController.index(),
+        },
+    ],
+};

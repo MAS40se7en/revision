@@ -26,8 +26,8 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Applications',
         href: ApplicationController.index(),
-        icon: Briefcase
-    }
+        icon: Briefcase,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
@@ -40,7 +40,7 @@ const footerNavItems: NavItem[] = [
         title: 'Documentation',
         href: 'https://laravel.com/docs/starter-kits#react',
         icon: BookOpen,
-    }
+    },
 ];
 
 export function AppSidebar() {

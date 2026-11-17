@@ -1,9 +1,9 @@
-import ApplicationController from "@/actions/App/Http/Controllers/ApplicationController";
-import Heading from "@/components/heading";
-import StatusBadge from "@/components/status-badge";
-import { Button } from "@/components/ui/button";
-import { Application } from "@/types";
-import { Head, Link, router } from "@inertiajs/react";
+import ApplicationController from '@/actions/App/Http/Controllers/ApplicationController';
+import Heading from '@/components/heading';
+import StatusBadge from '@/components/status-badge';
+import { Button } from '@/components/ui/button';
+import { Application } from '@/types';
+import { Head, Link, router } from '@inertiajs/react';
 
 export default function ShowApplication({
     application,
@@ -11,7 +11,7 @@ export default function ShowApplication({
     application: Application;
 }) {
     function handleDelete() {
-        if (window.confirm("Delete this application?")) {
+        if (window.confirm('Delete this application?')) {
             router.delete(ApplicationController.destroy.url(application.id));
         }
     }
@@ -32,7 +32,7 @@ export default function ShowApplication({
                 <dl className="grid gap-4 text-sm">
                     <div>
                         <dt className="text-muted-foreground">Date applied</dt>
-                        <dd>{application.applied_at?.slice(0, 10) ?? "--"}</dd>
+                        <dd>{application.applied_at?.slice(0, 10) ?? '--'}</dd>
                     </div>
                     {application.url && (
                         <div>
@@ -72,8 +72,8 @@ export default function ShowApplication({
                                 >
                                     <span className="font-medium capitalize">
                                         {interview.type}
-                                    </span>{" "}
-                                    ·{" "}
+                                    </span>{' '}
+                                    ·{' '}
                                     {new Date(
                                         interview.scheduled_at,
                                     ).toLocaleString()}
@@ -111,7 +111,7 @@ ShowApplication.layout = {
     breadcrumbs: [
         {
             title: 'Applications',
-            href: ApplicationController.index()
-        }
-    ]
-}
+            href: ApplicationController.index(),
+        },
+    ],
+};

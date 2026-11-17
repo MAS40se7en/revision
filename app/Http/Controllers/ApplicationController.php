@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Enums\ApplicationStatus;
 use App\Http\Requests\ApplicationRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Models\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -29,11 +29,11 @@ class ApplicationController extends Controller
             ->latest()
             ->paginate(10)
             ->withQueryString();
-        
+
         return Inertia::render('applications/index', [
             'applications' => $applications,
             'filters' => ['status' => $status?->value],
-            'statuses' => array_column(ApplicationStatus::cases(), 'value')
+            'statuses' => array_column(ApplicationStatus::cases(), 'value'),
         ]);
     }
 
@@ -45,7 +45,7 @@ class ApplicationController extends Controller
         Gate::authorize('create', Application::class);
 
         return Inertia::render('applications/create', [
-            'statuses' => array_column(ApplicationStatus::cases(), 'value')
+            'statuses' => array_column(ApplicationStatus::cases(), 'value'),
         ]);
     }
 
@@ -72,7 +72,7 @@ class ApplicationController extends Controller
         $application->load(['interviews' => fn ($query) => $query->orderBy('scheduled_at')]);
 
         return Inertia::render('applications/show', [
-            'application' => $application
+            'application' => $application,
         ]);
     }
 
@@ -85,7 +85,7 @@ class ApplicationController extends Controller
 
         return Inertia::render('applications/edit', [
             'application' => $application,
-            'statuses' => array_column(ApplicationStatus::cases(), 'value')
+            'statuses' => array_column(ApplicationStatus::cases(), 'value'),
         ]);
     }
 

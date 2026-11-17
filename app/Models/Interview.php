@@ -26,16 +26,21 @@ class Interview extends Model
 
     /**
      * Get the attributes that should be cast
-     * 
+     *
      * @return array<string, string>
      */
     protected function casts(): array
     {
         return [
-            'scheduled_at' => 'datetime'
+            'scheduled_at' => 'datetime',
         ];
     }
 
+    /**
+     * Summary of application
+     *
+     * @return BelongsTo<Application, $this>
+     */
     public function application(): BelongsTo
     {
         return $this->belongsTo(Application::class);

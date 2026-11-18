@@ -1,5 +1,7 @@
 import ApplicationController from '@/actions/App/Http/Controllers/ApplicationController';
+import InterviewController from '@/actions/App/Http/Controllers/InterviewController';
 import Heading from '@/components/heading';
+import InterviewForm from '@/components/interview-form';
 import StatusBadge from '@/components/status-badge';
 import { Button } from '@/components/ui/button';
 import { Application } from '@/types';
@@ -13,6 +15,14 @@ export default function ShowApplication({
     function handleDelete() {
         if (window.confirm('Delete this application?')) {
             router.delete(ApplicationController.destroy.url(application.id));
+        }
+    }
+
+    function handlDeleteInterview(interviewId: number) {
+        if (window.confirm('Delete this interview?')) {
+            router.delete(InterviewController.destroy.url(interviewId), {
+                preserveScroll: true,
+            });
         }
     }
 
@@ -68,20 +78,31 @@ export default function ShowApplication({
                             {application.interviews.map((interview) => (
                                 <li
                                     key={interview.id}
-                                    className="rounded-lg border p-3 text-sm"
+                                    className="flex items-start justify-between gap-4 rounded-lg border p-3 text-sm"
                                 >
-                                    <span className="font-medium capitalize">
-                                        {interview.type}
-                                    </span>{' '}
-                                    ·{' '}
-                                    {new Date(
-                                        interview.scheduled_at,
-                                    ).toLocaleString()}
-                                    {interview.notes && (
-                                        <p className="mt-1 text-muted-foreground">
-                                            {interview.notes}
-                                        </p>
-                                    )}
+                                    <div>
+                                        <span className="font-medium capitalize">
+                                            {interview.type}
+                                        </span>{' '}
+                                        ·{' '}
+                                        {new Date(
+                                            interview.scheduled_at,
+                                        ).toLocaleString()}
+                                        {interview.notes && (
+                                            <p className="mt-1 text-muted-foreground">
+                                                {interview.notes}
+                                            </p>
+                                        )}
+                                    </div>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() =>
+                                            handlDeleteInterview(interview.id)
+                                        }
+                                    >
+                                        Delete
+                                    </Button>
                                 </li>
                             ))}
                         </ul>
@@ -90,6 +111,8 @@ export default function ShowApplication({
                             No interview yet.
                         </p>
                     )}
+
+                    <InterviewForm applicationId={application.id} />
                 </div>
 
                 <div className="flex gap-2">

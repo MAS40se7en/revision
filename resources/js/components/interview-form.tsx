@@ -45,7 +45,7 @@ export default function InterviewForm({
                         <Label htmlFor="interview-notes">Notes</Label>
                         <Input
                             id="interview-notes"
-                            name="name"
+                            name="notes"
                             placeholder="Optional"
                         />
                         <InputError message={errors.notes} />

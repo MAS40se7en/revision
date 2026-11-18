@@ -53,6 +53,8 @@ test('users can delete an interview on their own application', function () {
     $interview = Interview::factory()->for($application)->create();
 
     $this->actingAs($user)->delete(route('interviews.destroy', $interview))->assertRedirect(route('applications.show', $application));
+
+    $this->assertModelMissing($interview);
 });
 
 test("users cannot delete an interview on another user\'s application", function () {
